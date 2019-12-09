@@ -1,4 +1,6 @@
 import os
+import random
+import monster_superclass as msc
 
 def game_meny(inpt):
     """
@@ -62,6 +64,46 @@ def accepted_Hero_Input(question):
         print("Please enter y for yes or n for no.")
         accepted_Hero_Input(question)
 
+def chance_50():
+    """
+        Randomize a number between 1-100.
+        Returns 1 or 0 depending on the random.
+    """
+    rad_int = random.randint(1,100)
+    if rad_int >= 50:
+        return 1
+    else:
+        return 0
+
+def place_Monster(grid_map):
+    """
+        Argument is the Map.
+        Creates a monster room dict and the value will be 1 or 0.
+        1 means there is a monster.
+        Returns the monster room dict.
+    """
+    rooms = grid_map.keys()
+    monster_room_dict = {}
+    for room in rooms:
+        i = chance_50()
+        if i == 1:
+            monster = spawn_Rate()
+            monster_room_dict[room] = monster
+    
+    return monster_room_dict    
+
+def spawn_Rate():
+    rnd_int = random.randint(1,50)
+    if rnd_int <= 20 and rnd_int > 1:
+        return_Value = "Spider"
+    elif rnd_int <= 35 and rnd_int > 21:
+        return_Value = "Skeleton"
+    elif rnd_int <= 45  and rnd_int > 36:
+        return_Value = "Orc"
+    else:
+        return_Value = "Troll"      
+    return return_Value    
+
 game_meny("Welcome to MF.JFAM's Dungeon Run!")
 #Userame will be linked to the game save.
 #This will be updated in the last sprint.
@@ -111,7 +153,10 @@ if map_Choice == 3:
 grid_map = create_map(map_Size)
 os.system("cls")
 game_meny(f"Playing as {hero}!")
-#While loop for 
+
+monster_Room_Dict = place_Monster(grid_map)
+print(monster_Room_Dict)
+#While loop for
 while True:
     right_input = ("1","2","3","4")
     
@@ -189,4 +234,6 @@ while True:
     #Puts @ where the hero is.
     else:
         grid_map[hero_pos[0], hero_pos[1]] = "@"
-        
+        hero_pos_Tuple = (hero_pos[0],hero_pos[1])
+        if hero_pos_Tuple in monster_Room_Dict:
+            wrong_input = monster_Room_Dict[hero_pos[0],hero_pos[1]]
