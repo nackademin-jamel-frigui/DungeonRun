@@ -1,5 +1,9 @@
 import random
 class Hero:
+    """
+        Superclass for heroes, arguments are initiative, 
+        immunity, attack, flexibility. This class got the flee func.
+    """
     def __init__(self,initiative, immunity, attack, flexibility):
         self.initiative = initiative
         self.immunity = immunity
@@ -22,9 +26,6 @@ class Knight(Hero):
             attack = 6,
             flexibility = 4
         )
-    
-    def special_Attack(self):
-        pass
 
 class Wizard(Hero):
     def __init__(self):
@@ -34,9 +35,6 @@ class Wizard(Hero):
             attack = 9,
             flexibility = 5
         )
-    def special_Attack(self):
-        pass
-
 class Thief(Hero):
     def __init__(self):
         super().__init__(
@@ -45,9 +43,3 @@ class Thief(Hero):
             attack = 5,
             flexibility = 7
         )
-    def special_Attack(self):
-        pass
-
-x = Knight()
-print("detta ör felx: " , x.flexibility)
-x.flee()
