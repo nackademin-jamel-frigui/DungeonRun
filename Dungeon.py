@@ -93,6 +93,10 @@ def place_Monster(grid_map):
     return monster_room_dict    
 
 def spawn_Rate():
+    """
+        Will spawn a random monster,
+        Returns a text string of the monster.
+    """
     rnd_int = random.randint(1,50)
     if rnd_int <= 20 and rnd_int > 1:
         return_Value = "Spider"
